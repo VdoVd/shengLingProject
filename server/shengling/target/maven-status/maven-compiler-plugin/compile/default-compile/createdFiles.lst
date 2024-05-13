@@ -1,0 +1,5 @@
+com\example\crm\controller\TheTestController.class
+com\example\crm\Mapper\TheTestClassMapper.class
+com\example\crm\controller\kk.class
+com\example\crm\pojo\TheTestClass.class
+com\example\crm\CrmApplication.class
