@@ -2,6 +2,7 @@ import { httpClass } from './req'
 import { promptAction, router } from '@kit.ArkUI'
 import { http } from '@kit.NetworkKit'
 import { image } from '@kit.ImageKit'
+import { tokenStore } from '../store'
 
 export const getCaptcha= async (phone:string)=>{
 
@@ -70,12 +71,12 @@ export const existRegisterFunc = async (name:string,pass:string)=>{
 
 export const loginFunc = async (name:string,pass:string)=>{
 
-  const res =await httpClass.post<boolean>('/login',{
+  const res =await httpClass.post<string>('/login',{
     name:name,
     pass:pass
   } as loginInterface)
-
-  if(res){
+  tokenStore.setToken(res.toString())
+  if(res!=""){
     promptAction.showToast({message:'登录成功'})
   }else {
     promptAction.showToast({message:'登录失败'})

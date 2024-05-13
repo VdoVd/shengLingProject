@@ -5,15 +5,22 @@ import { promptAction, router } from '@kit.ArkUI'
 @Component
 struct Login {
   @State time:number=5
-  @State name:string=''
-  @State password:string=''
-  onPageShow(): void {
+  @State name:string='admin'
+  @State password:string='123456'
+
+  async onPageShow(): Promise<void> {
     let timeId=setInterval(()=>{
       this.time--
       if(this.time===0){
         clearInterval(timeId)
       }
     },1000)
+    const res=await loginFunc(this.name,this.password)
+    if(res){
+      router.pushUrl({url:'pages/Index'})
+    }else {
+
+    }
 
   }
   build() {

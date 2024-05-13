@@ -8,9 +8,28 @@ struct Login {
   @State username:string='admin'
   @State password:string='123456'
   @State code:string=''
-  @State phone:string=''
+  @State phone:string='15360606636'
   @State img:image.PixelMap={} as image.PixelMap
   @State getCaptcha:boolean=false
+
+  async onPageShow(): Promise<void> {
+
+    // this.img=await getCaptcha(this.phone)
+    // if(this.img!=undefined){
+    //   this.getCaptcha=true
+    // }else {
+    //   this.getCaptcha=false
+    // }
+    //
+    // const res=await register(this.phone,this.code)
+    // if(res)
+    //   router.pushUrl({
+    //     url:'pages/Login',
+    //   })
+    router.pushUrl({
+      url:'pages/Login'
+    })
+  }
   build() {
     Row() {
       Column({space:15}) {
