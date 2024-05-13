@@ -1,7 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/Register",
+    "pages/captcha",
     "pages/Login"
   ]
 }

@@ -2,6 +2,8 @@ package com.example.crm.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import com.example.crm.Mapper.UserMapper;
+import com.example.crm.pojo.User;
 import com.example.crm.pojo.req.Register;
 import com.example.crm.result.AllReturn;
 import com.google.gson.Gson;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class captchaController {
@@ -26,6 +31,9 @@ public class captchaController {
 
     @Autowired
     AllReturn allReturn;
+
+    @Autowired
+    UserMapper userMapper;
     /*
      * 验证码
      * */
@@ -45,6 +53,32 @@ public class captchaController {
         response.getOutputStream().close();
     }
 
+    @GetMapping("/register/exist")
+    public String exist(@RequestBody Register register) throws IOException {
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("name", register.getPhone());
+
+        List<User> list = userMapper.selectByMap(map);
+
+        if (list.size()!= 0) {
+            allReturn.setCode(200);
+            allReturn.setMessage("已注册过");
+            allReturn.setSuccess(true);
+            allReturn.setData(new Gson().toJson(list.get(0)));
+            System.out.println(new Gson().toJson(allReturn));
+            return new Gson().toJson(allReturn);
+        }else {
+            allReturn.setSuccess(false);
+            allReturn.setMessage("未注册");
+            allReturn.setCode(400);
+            allReturn.setData(false);
+            return new Gson().toJson(allReturn);
+        }
+
+    }
+
     @PostMapping("/captcha/register")
     public String register(@RequestBody Register register) throws IOException {
 
@@ -53,13 +87,16 @@ public class captchaController {
         String redisCode = (String) redisTemplate.opsForValue().get(phone);
 
         if (code.toLowerCase().equals(redisCode.toLowerCase())){
-            allReturn.setSuccess(true);
-            allReturn.setMessage("验证码正确");
-            allReturn.setCode(200);
-            allReturn.setData(true);
-            return new Gson().toJson(allReturn);
 
-        }else {
+                allReturn.setSuccess(true);
+                allReturn.setMessage("验证码正确");
+                allReturn.setCode(200);
+                allReturn.setData(true);
+                return new Gson().toJson(allReturn);
+
+        }
+        else {
+
             allReturn.setSuccess(false);
             allReturn.setMessage("验证码错误");
             allReturn.setCode(400);

@@ -1,5 +1,5 @@
 import { httpClass } from './req'
-import { promptAction } from '@kit.ArkUI'
+import { promptAction, router } from '@kit.ArkUI'
 import { http } from '@kit.NetworkKit'
 import { image } from '@kit.ImageKit'
 
@@ -38,9 +38,47 @@ export const register = async (phone:string,code:string)=>{
   } as registerInterface)
 
   if(res){
+
+    router.pushUrl({
+      url:'pages/Login'
+    })
     promptAction.showToast({message:'注册成功'})
   }else {
     promptAction.showToast({message:'注册失败'})
+  }
+  return res
+}
+
+export interface loginInterface{
+  name:string
+  pass:string
+}
+
+export const existRegisterFunc = async (name:string,pass:string)=>{
+
+  const res =await httpClass.post<boolean>('/login',{
+    name:name,
+    pass:pass
+  } as loginInterface)
+
+  if(res){
+    promptAction.showToast({message:'注册过'})
+  }
+  return res
+}
+
+
+export const loginFunc = async (name:string,pass:string)=>{
+
+  const res =await httpClass.post<boolean>('/login',{
+    name:name,
+    pass:pass
+  } as loginInterface)
+
+  if(res){
+    promptAction.showToast({message:'登录成功'})
+  }else {
+    promptAction.showToast({message:'登录失败'})
   }
   return res
 }

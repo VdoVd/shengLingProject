@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Login {
-    String username;
-    String password;
+    String name;
+    String pass;
 }

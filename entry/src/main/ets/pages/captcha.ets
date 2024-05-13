@@ -35,12 +35,13 @@ struct Login {
 
             }else{
 
-              this.img=await getCaptcha(this.phone)
-              if(this.img!=undefined){
-                this.getCaptcha=true
-              }else {
-                this.getCaptcha=false
-              }
+                this.img=await getCaptcha(this.phone)
+                if(this.img!=undefined){
+                  this.getCaptcha=true
+                }else {
+                  this.getCaptcha=false
+                }
+
 
             }
 
