@@ -1,3 +1,5 @@
+import taskContent from '../views/tasks/taskContent'
+
 @Entry
 @Component
 struct Index {
@@ -20,7 +22,7 @@ struct Index {
 
       Tabs(){
         TabContent(){
-          Text('task')
+          taskContent()
         }.tabBar(this.tarBarBuilder('任务',$r('app.media.task'),0))
         TabContent(){
           Text('mess')
