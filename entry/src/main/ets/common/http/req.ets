@@ -1,9 +1,11 @@
 import { http } from '@kit.NetworkKit'
 import { ExpectExtend } from '@ohos/hypium'
+import { BASE_URL } from '../constants'
 import { allResponse, SysUser, SysUserWithToken } from '../Model'
 import { tokenStore, userStore } from '../store'
+import { AllReturn } from './task'
 
-const baseUrl='http://192.168.110.1:8080'
+const baseUrl=BASE_URL
 
 export const Login= async (username:string,password:string)=>{
 
@@ -58,21 +60,24 @@ export const test= async ()=>{
 
 export class httpClass {
 
-  private static baseUrl = 'http://192.168.110.1:8080'
+  private static baseUrl = baseUrl
 
   public static async get<T>(url: string) {
+
     let req = http.createHttp()
 
-    const res = await req.request(`${baseUrl}${url}`, {
-      method: http.RequestMethod.GET,
-      header: {
-        token: tokenStore.getToken()
-      }
-    })
+    let res:http.HttpResponse
 
-    const result = JSON.parse(res.result.toString()) as allResponse<T>
+      res = await req.request(`${baseUrl}${url}`, {
+        method: http.RequestMethod.GET,
+        header: {
+          Authorization: tokenStore.getToken()
+        }
+      })
 
-    console.log(`get result:${JSON.stringify(result)}`)
+    const result = JSON.parse(res.result.toString()) as AllReturn<T>
+
+    console.log(`get result:${JSON.stringify(res.result)}`)
 
     return result.data
   }
@@ -105,10 +110,10 @@ export class httpClass {
 
       console.log(`post ${url}:${JSON.stringify(res.result)}`)
       console.log(`result:${(JSON.stringify(res.result))}`)
-      const result=res.result as allResponse<T>
+      const result=res.result as AllReturn<T>
       // let result2:allResponse<T>={} as allResponse<T>
       // result2=JSON.parse(res.result.toString()) as allResponse<T>
-      console.log('result.toString():'+result.message)
+      console.log('result.toString():'+result.msg)
       console.log(`data is:${result.data}`)
       //   4. 将服务器的数据返回
       return result.data

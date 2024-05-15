@@ -16,11 +16,13 @@ struct Index {
     }
   }
 
+  async onPageShow(): Promise<void> {
+
+  }
+
   build() {
-
     Column(){
-
-      Tabs(){
+      Tabs({index:this.num}){
         TabContent(){
           taskContent()
         }.tabBar(this.tarBarBuilder('任务',$r('app.media.task'),0))
@@ -34,7 +36,6 @@ struct Index {
         this.num=index
       })
       .barPosition(BarPosition.End)
-
     }
 
   }

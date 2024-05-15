@@ -1,6 +1,10 @@
 {
   "string": [
     {
+      "name": "page_show",
+      "value": "page from npm package"
+    },
+    {
       "name": "module_desc",
       "value": "module description"
     },
@@ -10,6 +14,14 @@
     },
     {
       "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "ListenAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "ListenAbility_label",
       "value": "label"
     }
   ]

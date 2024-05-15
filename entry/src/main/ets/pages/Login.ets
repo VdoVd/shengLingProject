@@ -4,8 +4,8 @@ import { promptAction, router } from '@kit.ArkUI'
 @Entry
 @Component
 struct Login {
-  @State time:number=5
-  @State name:string='admin'
+  @State time:number=2
+  @State name:string='laogao_next'
   @State password:string='123456'
 
   async onPageShow(): Promise<void> {
@@ -15,12 +15,14 @@ struct Login {
         clearInterval(timeId)
       }
     },1000)
-    const res=await loginFunc(this.name,this.password)
-    if(res){
-      router.pushUrl({url:'pages/Index'})
-    }else {
+    // const res=await loginFunc(this.name,this.password)
+    // if(res){
+    //   router.pushUrl({url:'pages/Index'})
+    // }else {
+    //
+    // }
+    await this.login()
 
-    }
 
   }
   build() {
@@ -49,12 +51,7 @@ struct Login {
 
         Button('登录')
           .onClick(async ()=>{
-            const res=await loginFunc(this.name,this.password)
-            if(res){
-              router.pushUrl({url:'pages/Index'})
-            }else {
-
-            }
+            await this.login()
           }).width('100%')
 
       }.padding(20)
@@ -65,4 +62,11 @@ struct Login {
 
   }
 
+  private async login() {
+    const res = await loginFunc(this.name, this.password)
+    if (res) {
+      router.pushUrl({ url: 'pages/Index' })
+    } else {
+    }
+  }
 }

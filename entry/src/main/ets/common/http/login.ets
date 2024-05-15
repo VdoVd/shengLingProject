@@ -3,6 +3,7 @@ import { promptAction, router } from '@kit.ArkUI'
 import { http } from '@kit.NetworkKit'
 import { image } from '@kit.ImageKit'
 import { tokenStore } from '../store'
+import { BASE_URL } from '../constants'
 
 export const getCaptcha= async (phone:string)=>{
 
@@ -51,32 +52,32 @@ export const register = async (phone:string,code:string)=>{
 }
 
 export interface loginInterface{
-  name:string
-  pass:string
+  account:string
+  password:string
 }
 
-export const existRegisterFunc = async (name:string,pass:string)=>{
-
-  const res =await httpClass.post<boolean>('/login',{
-    name:name,
-    pass:pass
-  } as loginInterface)
-
-  if(res){
-    promptAction.showToast({message:'注册过'})
-  }
-  return res
+export interface loginResponse{
+  code:number
+  data:string
+  msg:string
 }
-
 
 export const loginFunc = async (name:string,pass:string)=>{
 
-  const res =await httpClass.post<string>('/login',{
-    name:name,
-    pass:pass
-  } as loginInterface)
-  tokenStore.setToken(res.toString())
-  if(res!=""){
+  const res =await http.createHttp().request(`${BASE_URL}/login/account`,{
+    method:http.RequestMethod.POST,
+    header: {
+      "Content-Type": "application/json"
+    },
+    extraData:{
+      account:name,
+      password:pass
+    }
+  })
+  promptAction.showDialog({message:`${JSON.stringify(JSON.parse(res.result.toString()))}`})
+  const result = JSON.parse(res.result.toString()) as loginResponse
+  tokenStore.setToken(result.data)
+  if(result.code===200){
     promptAction.showToast({message:'登录成功'})
   }else {
     promptAction.showToast({message:'登录失败'})
