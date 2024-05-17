@@ -5,7 +5,7 @@ export default struct RunningView{
 
   build() {
     Column(){
-      ListView()
+      ListView().height('100%')
     }.width('100%').height('100%')
   }
 

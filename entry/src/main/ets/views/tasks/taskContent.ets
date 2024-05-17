@@ -115,20 +115,21 @@ export default struct taskContent{
       TabContent(){
         unFinishContent().width('100%').height('100%')
       }.tabBar(this.tarBarBuilder('待提货',0))
-
+      .height('100%')
       TabContent(){
         RunningView().width('100%').height('100%')
       }.tabBar(this.tarBarBuilder('在途',1))
-
+      .height('100%')
       TabContent(){
 
         finishView().height('100%').width('100%')
 
       }.tabBar(this.tarBarBuilder('已完成',2))
-
+      .height('100%')
     }.onTabBarClick((index)=>{
       this.selectNumber=index
     })
+    .height('100%')
 
   }
 

@@ -11,14 +11,15 @@ export default struct ListView{
     if(!this.loadingFlag)
     Refresh({refreshing:$$this.refreshingFlag}){
 
+  List(){
+    ForEach(this.list,(item:TaskItem,index:number)=>{
+      ListItem(){
+        ListItemView({item:item})
+      }
+    })
+  }.height('100%').width('100%')
 
-      List(){
-        ForEach(this.list,(item:TaskItem,index:number)=>{
-          ListItem(){
-            ListItemView({item:item})
-          }
-        })
-      }.height('100%').width('100%')
+
 
 
     }.height('100%').width('100%')

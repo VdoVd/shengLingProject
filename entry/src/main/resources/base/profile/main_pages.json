@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/captcha",
-    "pages/Login"
+    "pages/Login",
+    "pages/detailPage"
   ]
 }

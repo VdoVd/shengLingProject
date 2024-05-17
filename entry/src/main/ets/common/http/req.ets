@@ -67,6 +67,7 @@ export class httpClass {
     let req = http.createHttp()
 
     let res:http.HttpResponse
+    console.log(`before url:${baseUrl}${url}`)
 
       res = await req.request(`${baseUrl}${url}`, {
         method: http.RequestMethod.GET,
