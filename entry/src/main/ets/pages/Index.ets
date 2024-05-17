@@ -1,3 +1,4 @@
+import My from '../views/mine/My'
 import taskContent from '../views/tasks/taskContent'
 
 @Entry
@@ -30,7 +31,7 @@ struct Index {
           Text('mess')
         }.tabBar(this.tarBarBuilder('消息',$r('app.media.mess3'),1))
         TabContent(){
-          Text('mine')
+          My()
         }.tabBar(this.tarBarBuilder('我的',$r('app.media.mine'),2))
       }.onTabBarClick((index)=>{
         this.num=index

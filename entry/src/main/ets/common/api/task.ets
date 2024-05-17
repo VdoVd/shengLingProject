@@ -1,5 +1,5 @@
-import { Request } from 'shenling_common'
 import {ExceptionParamsTypeModel, DelayParamsTypeModel, DeliverParamsTypeModel, TaskListDataModel, TaskListParamsModel, TaskDetailInfoModel, PickUpParamsModel, CarRecordTypeModel } from '../models/index'
+import { Request } from '../utils'
 
 // 类型传值时 既可以用interface 也可以用class
 export const getTaskList = (params: TaskListParamsModel) => {

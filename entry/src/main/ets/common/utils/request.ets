@@ -4,8 +4,7 @@ import { UserSettingClass } from './setting'
 import promptAction from '@ohos.promptAction'
 import router from '@ohos.router'
 import { ResponsesData } from '../models'
-
-
+import { tokenStore } from '../store'
 
 
 interface EmptyInterface {}
@@ -39,7 +38,7 @@ async function requestHttp<T> (url: string = "", method: http.RequestMethod = ht
     // 请求头
     header: {
       'Content-Type': 'application/json',
-      "Authorization": AppStorage.Get<string>(TOKEN_KEY) || ''
+      "Authorization": tokenStore.getToken()
     }
   }
   try {

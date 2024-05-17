@@ -1,6 +1,6 @@
 
 import { UserCarDataTypeModel, LoginFormModel, UserInfoModel, UserTaskInfoModel, UserTaskInfoParamsModel } from '../models/index'
-import { Request } from 'shenling_common'
+import { Request } from '../utils'
 
 // 登录接口实现
 export const login = (data: LoginFormModel) => {

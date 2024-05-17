@@ -1,5 +1,5 @@
-import { Request } from 'shenling_common'
 import {  MessageQueryTypeModel, MessageDataModel } from '../models/index'
+import { Request } from '../utils'
 
 // 获取信息
 export const getMessage = (params: MessageQueryTypeModel) => {
