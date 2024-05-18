@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/captcha",
     "pages/Login",
-    "pages/detailPage"
+    "pages/detailPage",
+    "pages/Car"
   ]
 }

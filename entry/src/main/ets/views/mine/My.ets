@@ -109,7 +109,7 @@ struct My {
       HmCard() {
         HmCardItem({ leftTitle: '车辆信息', rightText: '', onRightClick: () => {
           router.pushUrl({
-            url: 'pages/Car/Car'
+            url: 'pages/Car'
           })
         } })
         HmCardItem({ leftTitle: '任务数据', rightText: '',
